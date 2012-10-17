@@ -1,0 +1,49 @@
+body{
+	-webkit-font-smoothing: antialiased;
+	margin:0px auto;
+	background: url('/static/img/wall.gif');
+	font-family:Georgia;
+}
+
+#well_this_is_awkward{
+    width:1100px;
+    margin:0px auto;
+    height:400px;
+    text-align:center;
+    padding-top:200px;
+    line-height:1.4;
+    text-shadow: 0px 1px rgba(255,255,255,0.6);
+}
+
+#logo{
+    font-family:Century;
+    font-size:40px;
+}
+
+#getchrome, #getfirefox, #getopera{
+    width:100px;
+    height:100px;
+    margin:0px 10px;
+}
+
+#getsafari{
+    width:100px;
+    height:114px;
+    margin:0px 10px;
+}
+
+#getchrome:after{
+    content: url('/static/img/chrome.png');
+}
+
+#getfirefox:after{
+    content: url('/static/img/firefox.png');
+}
+
+#getsafari:after{
+    content: url('/static/img/safari.png');
+}
+
+#getopera:after{
+    content: url('/static/img/opera.png');
+}

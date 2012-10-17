@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>tackboard: {{ board.name }}</title>
+    <meta name="author" content="Artur Sapek">
+
+    <!-- css, favicon -->
+    <link rel="shortcut icon" href="/static/img/favicon.gif" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/static/css/tackboard.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery.wysiwyg.css">
+
+    <!-- jQuery helper js -->
+    <script src="/static/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.hashchange.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.wysiwyg.js" type="text/javascript"></script>
+
+    <!-- tackboard js -->
+    <script src="/static/js/build/production.min.js" type="text/javascript"></script>
+
+    <!-- initializing global variables and statcounter js -->
+    <script type="text/javascript">
+        var sc_project=7839830, 
+            sc_invisible=1, 
+            sc_security="6d1cabb9"; 
+        csrf_token = '{{ csrf_token }}';
+        board_id = {{ board.id }};
+        categories = [{% for c in categories %}'{{ c.name }}', {% endfor %}]
+        current_category = '{{ default_category }}';
+        default_category = '{{ default_category }}';
+        setInterval(function(){
+            ajax.update();
+        }, {{ board.refresh_rate }}000);
+    </script>
+    <script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+
+</head>
+<body>
+
+    <!-- the board itself -->
+    <div id="tackboard" class="inner_shadow">
+    
+        <!-- poster editor -->
+        <div id="editor" class="shadow">
+            <div id="editor_inside">
+                <div id="inset_cork" class="inner_shadow">
+                    <div id="editable_poster">
+                        <textarea id="edit_me"></textarea>
+                    </div>
+                    <div id="posting_tips" class="noselect">
+                        <div id="tip1" class="noselect">Compose your poster here.</div>
+                        <div id="tip2" class="noselect">URL's and emails will become links.</div>
+                        <div id="tip3" class="noselect">Please don't try using HTML or pasting.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- black header with name and categories dropdown list -->
+        <div id="header" class="noselect">
+            <div id="logo">
+                
+                <!-- header logo, categories button, and links -->
+                <div onclick="document.location='/'" class="logo_main" id="tackboard_logo">tackboard:</div> 
+                <span class="locale" id="board_name">{{ board.name }}</span> 
+                <span class="category" id="category_dropdown_button">{{ default_category }}</span>
+                <span class="help" onclick="help()">help</span>
+                
+                <!-- categories dropdown list -->
+                <div id="categories">
+                    <ul class="category_list" id="category_dropdown">
+                    {% for c in categories %}
+                        {% if not c.default %}
+                            <li onclick="ajax.switch($(this).text())">{{ c.name }}</li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- new poster button -->
+        <div id="add_button" onclick="toggle_editor()"></div>
+        
+    </div>
+    
+    <!-- footer with secondary home and help buttons and twitter link -->
+    <div id="footer" class="noselect">
+
+        <a href="/" class="big">home</a>
+        <a href="javascript:help();" class="big">help</a>
+
+    <br><br>
+        an experiment built by <a href="http://artur.co" target="new_tab">Artur Sapek</a>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>tackboard: {{ board.name }}</title>
+    <meta name="author" content="Artur Sapek">
+    <link rel="shortcut icon" href="/static/img/favicon.gif" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/static/css/tackboard.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery.wysiwyg.css">
+    <script src="/static/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.autogrow.js" type="text/javascript"></script>
+    <script src="/static/js/short.js" type="text/javascript"></script>
+    <script src="/static/js/tackboard.js" type="text/javascript"></script>
+    <script src="/static/js/objects.js" type="text/javascript"></script>
+    <script src="/static/js/drag.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        csrf_token = '{{ csrf_token }}';
+        board_id = {{ board.id }};
+        setInterval(function(){
+            ajax.update();
+        }, {{ board.refresh_rate }}000);
+    </script>
+</head>
+<body>
+    <div id="tackboard" class="inner_shadow">
+        
+        <div id="editor" class="shadow">
+            <div id="editor_inside">
+                <div id="inset_cork" class="inner_shadow">
+                    <div id="editable_poster">
+                        <div id="poster_composer">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="header">
+            <div id="logo" class="noselect">
+            <div class="logo_main">tackboard:</div> <span class="locale">{{ board.name }}</span>
+            </div>
+        </div>
+        
+        <div id="add_button" onclick="E.toggle()">
+            
+        </div>
+    </div>
+    
+    
+    <div id="footer">
+        an experiment built by <a href="http://twitter.com/artur_sapek" target="new_tab">Artur Sapek</a>
+    </div>
+</body>
+</html>
+
