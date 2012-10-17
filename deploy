@@ -1,5 +1,0 @@
-#!/bin/bash
-cd tackboard_me
-git pull origin master
-python manage.py collectstatic --noinput
-../apache2/bin/restart
